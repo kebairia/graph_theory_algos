@@ -12,41 +12,34 @@ class MatriceIncidence:
 #│	THE FUNCTIONS		 │
 #└───────────────────────────────┘
     def vertices(self,Graph_init):
-        List = []
-        for key,values in Graph_init.items():
-            if key not in List:
-                List.append(key)
+        list_of_vertices = []
+        for values in Graph_init.values():
             for value in values:
-                if value not in List:
-                    List.append(value)
-        return List
-    def or_adj_matrix(self,Graph_init):
-        initMarix = []
-        for everyVertix in range(self.verticesNumber):
-            # to prevent making the row dependet
-            initMarix.append(["0"]*self.verticesNumber)
-        for index in self.keys:
-            for i in Graph_init[index]:
-            	initMarix[index-1][i-1] = "1"
-        return initMarix
-    def nr_adj_matrix(self,Graph_init):
-        # Creating the initial Matrix
-        initMarix = []
-        for everyVertix in range(self.verticesNumber):
-        # to prevent making the row dependet
-            initMarix.append(["0"]*self.verticesNumber)
-        for index in self.keys:
-            for i in Graph_init[index]:
-            	initMarix[index-1][i-1] = "1"
-            	initMarix[i-1][index-1] = "1"
-        return initMarix
+                if value not in list_of_vertices:
+                    list_of_vertices.append(value)
+        return list_of_vertices
 
+    def ind_matrix(self,Graph_init):
+        initMatrix = []
+        #tmp graph for iterating uses
+        myGraph = {}
+        for i in range(len(self.keys)):
+            myGraph[i+1] = self.values[i]
+        #Creat the initial Matrix
+        for i in range(len(self.vertices(Graph_init))):
+            initMatrix.append([" 0"]*len(self.keys))
+        #Creating the incedence matrix
+        for key, values in myGraph.items():
+            initMatrix[values[0]-1][key-1] = " 1" 
+            initMatrix[values[1]-1][key-1] = '-1'
+        return initMatrix
+            
     def display(self,myMatrix):
-        dbar = '───'*self.verticesNumber
+        dbar = '────'*len(self.keys)
 #TODO: make the display dynamic with the length of any graph/matrix
-        print ('             ',end='  ')
-        for everyrow in range(self.verticesNumber):
-            print (everyrow+1,end='  ')
+        print ('              ',end='  ')
+        for everyrow in self.keys:
+            print (everyrow,end='   ')
         print()
         print('	   ',"┌─%s─┐"%(dbar))
         for everyrow in range(self.verticesNumber):
@@ -56,40 +49,29 @@ class MatriceIncidence:
             print ('│  ',end='')
             print()
         print('	   ',"└─%s─┘"%(dbar))
+
+        
 #┌───────────────────────────────┐
 #│	THE MAIN FUNCTION	 │
 #└───────────────────────────────┘
 def main():
     myGraph ={
-           1:[2,3],
-           2:[1,3,5],
-           3:[1,2,4,5],
-           4:[3,5,2],
-           5:[2,3,4]
-                }
-    myGraph2 ={
-           1:[2,3],
-           2:[3,5],
-           3:[4],
-           4:[5],
-           5:[3]
+           "a":[1,2],
+           "b":[1,3],
+           "c":[2,3],
+           "d":[2,5],
+           "e":[5,3],
+           "f":[3,4],
+           "g":[4,5]
                 }
     adj = MatriceIncidence(myGraph)
-    orAdjMatrix = adj.or_adj_matrix(myGraph2)
-    nonOrAdjMatrix = adj.nr_adj_matrix(myGraph)
-    os.system('clear')
+    ind = adj.ind_matrix(myGraph)
     print ("""
-	┌───────────────────────────────┐
-	│    ORIENTED ADJANCY MATRIX	│
-	└───────────────────────────────┘
+	    ┌───────────────────────────────┐
+	    │        INCEDENCE MATRIX       │
+	    └───────────────────────────────┘
 	""")
-    adj.display(orAdjMatrix)
-    print ("""
-	┌───────────────────────────────┐
-	│  NON ORIENTED ADJANCY MATRIX	│
-	└───────────────────────────────┘
-	""")
-    adj.display(nonOrAdjMatrix)
+    adj.display(ind)
 
 
 
