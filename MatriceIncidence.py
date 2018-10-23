@@ -33,6 +33,8 @@ class MatriceIncidence:
             initMatrix[values[0]-1][key-1] = " 1" 
             initMatrix[values[1]-1][key-1] = '-1'
         return initMatrix
+    # FIXME: the prg is restricted to a dict with sorted key label
+    #		must fix this even if the graph given was not a key sorted.
             
     def display(self,myMatrix):
         dbar = '────'*len(self.keys)
