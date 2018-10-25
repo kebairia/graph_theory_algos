@@ -79,6 +79,9 @@ class MatriceAdjacence:
             print ('│  ',end='')
             print()
         print('	   ',"└─%s─┘"%(dbar))
+#┌───────────────────────────────┐
+#│	      MAIN		 │
+#└───────────────────────────────┘
 def main():
     myGraph = {
         1:[2,3],
@@ -87,7 +90,6 @@ def main():
         4:[3,5],
         5:[4,3,2],
         6:[4,3,2,1]
-        
     }
     obj = MatriceAdjacence(myGraph)
     myOrMatrix = obj.generate_or_adj_matrix(myGraph)
@@ -112,4 +114,3 @@ def main():
     obj.list_adj(myGraph)
 if __name__ == '__main__':
     main()
-
