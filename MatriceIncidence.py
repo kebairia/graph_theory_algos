@@ -58,13 +58,13 @@ class MatriceIncidence:
 #└───────────────────────────────┘
 def main():
     myGraph ={
-           "a":[1,2],
-           "b":[1,3],
-           "c":[2,3],
-           "d":[2,5],
-           "e":[5,3],
-           "f":[3,4],
-           "g":[4,5]
+           "A":[1,2],
+           "B":[1,3],
+           "C":[2,3],
+           "D":[2,5],
+           "E":[5,3],
+           "F":[3,4],
+           "G":[4,5]
                 }
     adj = MatriceIncidence(myGraph)
     ind = adj.ind_matrix(myGraph)

@@ -2,5 +2,6 @@
 case $1 in
     -a | --adjancy) python3.6 MatriceAdjacence.py ;;
     -i | --incidence) python3.6 MatriceIncidence.py ;;
+    -w | --welsh) python3.6 welsh_powell.py ;;
     -ia | -ai ) python3.6 MatriceIncidence.py ; python3.6 MatriceAdjacence.py;;
 esac
